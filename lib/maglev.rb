@@ -18,7 +18,7 @@ module Maglev
   ServiceContext = Struct.new(:rendering_mode, :controller, :site, keyword_init: true)
 
   class << self
-    attr_accessor :local_themes
+    attr_accessor :local_themes, :theme_reloader_disabled
 
     # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     def config
@@ -40,6 +40,7 @@ module Maglev
         c.admin_password = nil # legacy config
         c.static_pages = []
         c.reserved_paths = []
+        c.parent_controller = 'ApplicationController'
         c.tailwindcss_folders = []
         c.pagination = ::Maglev::DEFAULT_PAGINATION.dup
       end
@@ -52,6 +53,10 @@ module Maglev
         config.reserved_paths = Maglev::ReservedPaths.new(config.reserved_paths)
         require_relative 'maglev/active_storage' if config.uploader == :active_storage
       end
+    end
+
+    def parent_controller_class
+      (config.parent_controller.presence || 'ApplicationController').constantize
     end
 
     def uploader
@@ -77,6 +82,15 @@ module Maglev
 
       config = Rails.configuration.generators
       @uuid_as_primary_key = config.options[config.orm][:primary_key_type] == :uuid
+    end
+
+    # disable the theme reloader which is required by the Maglev SaaS plugin
+    def disable_theme_reloader
+      @theme_reloader_disabled = true
+    end
+
+    def theme_reloader_enabled?
+      !@theme_reloader_disabled
     end
 
     def config_klass

@@ -83,7 +83,8 @@ es:
           confirm_delete: "¿Estás seguro de que quieres eliminarlo?"          
         new:
           title: "Agregar una sección"
-          empty_category: "Sin secciones"
+          search_placeholder: "Buscar una sección"
+          empty_list: "No se encontraron secciones"
         edit:
           no_settings: "No hay configuraciones definidas en esta sección"
           tabs:
@@ -107,6 +108,7 @@ es:
       style:
         edit:
           title: "Estilizar tu sitio"
+          sub_title: "Ajusta colores, tipografía y otros ajustes del tema que se aplican a todo el sitio."
           submit_button:
             default: "Actualizar estilo"
             in_progress: "Actualizando..."
