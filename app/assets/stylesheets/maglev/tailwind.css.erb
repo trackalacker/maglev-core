@@ -14,6 +14,8 @@
 @custom-variant editor-preview-empty (body:has([data-controller~="editor-page-preview"].is-empty) &);
 
 @source "<%= Maglev::Engine.root.join('app') %>";
+/* The build's own output sits under app/; scanning it would make each build depend on the last. */
+@source not "<%= Maglev::Engine.root.join('app/assets/builds') %>";
 @source "<%= Maglev::Engine.root.join('lib') %>";
 @source "<%= Maglev::Engine.root.join('spec/components/previews/maglev/uikit') %>";
 
