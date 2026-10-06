@@ -31,7 +31,8 @@ namespace :maglev do
 
       require 'bundler'
       Bundler.with_unbundled_env do
-        system "#{command_path} -i #{input_path} -o #{output_path} #{options}"
+        # Fail the precompile rather than digest a stale or committed tailwind.css.
+        system "#{command_path} -i #{input_path} -o #{output_path} #{options}", exception: true
       end
 
       # Rewrite modern CSS syntax that LibSass (sassc-rails) can't parse

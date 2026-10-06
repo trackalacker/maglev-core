@@ -14,13 +14,14 @@
 @custom-variant editor-preview-empty (body:has([data-controller~="editor-page-preview"].is-empty) &);
 
 @source "<%= Maglev::Engine.root.join('app') %>";
-/* The build's own output sits under app/; scanning it would make each build depend on the last. */
+/* Build output (ours, and the host's if a listed folder contains it) would make each build depend on the last. */
 @source not "<%= Maglev::Engine.root.join('app/assets/builds') %>";
+@source not "<%= Rails.root.join('app/assets/builds') %>";
 @source "<%= Maglev::Engine.root.join('lib') %>";
 @source "<%= Maglev::Engine.root.join('spec/components/previews/maglev/uikit') %>";
 
 <% Maglev.config.tailwindcss_folders.each do |folder| %>
-@source "<%= folder %>";
+@source "<%= Rails.root.join(folder) %>";
 <% end %>
 
 @utility bg-checkerboard {
