@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap");
 
-@import "tailwindcss";
+/* source(none): scan only the folders below, not the host app's working directory, so every
+   build of the same code emits the same CSS and the same asset digest. */
+@import "tailwindcss" source(none);
 
 @theme {
   --font-nunito: "Nunito Sans", sans-serif;

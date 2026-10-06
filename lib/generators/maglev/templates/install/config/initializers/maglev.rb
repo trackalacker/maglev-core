@@ -93,5 +93,7 @@ Maglev.configure do |config|
 
   # Extra Tailwind CSS folders to watch for changes.
   # To be used if you need to implement a custom component in a folder of the main app.
+  # The editor CSS scans only the gem and these folders, so list every app folder whose
+  # markup uses Tailwind classes in the editor (overridden editor views, custom components).
   # config.tailwindcss_folders = []
 end
